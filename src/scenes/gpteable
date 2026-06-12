@@ -1,0 +1,45 @@
+//decoder number-image
+export const TTable = {
+    0: { terrain: "ground", walkable: true },
+    1: { terrain: "wall", walkable: false }
+
+} as TTable;
+
+//terrains designed by ArisaDev.
+export const mapData {
+    
+    0:{ [
+        [0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,0,0,1,0,1,1,1],
+        [0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,0,0,1,0,0,0,0],
+        [0,0,0,0,0,1,0,1,1,1],
+        [0,1,1,1,0,1,0,0,0,0],
+        [0,0,0,1,0,0,0,0,0,0],
+        [0,0,0,1,0,1,0,0,0,0],
+        [0,0,0,1,0,1,0,0,0,0]
+        ]
+    }
+}
+
+import {Cell} from './Cell.ts';
+
+export class Grid (mapData) {
+    width: number;
+    height: number;
+    cells: Cell[][];
+
+    constructor(width: number, height: number, mapData: mapData) {
+        this.width = width;
+        this.height = height;
+
+        this.cells = [];
+
+        for (let y = 0; y < mapData.length; y++) {
+            for (let x = 0; x < mapData[y].length; x++) {
+                const tileId = mapData[y][x];
+            }
+        }
+    }
+}
