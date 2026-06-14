@@ -1,10 +1,16 @@
 import Phaser from "phaser";
 import {Grid} from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
+import Player from "../entities/Player";
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
 
+    //controls
+    private keys!: any;
     private grid!: Grid;
+  
+    private player!: Player;
+    private playerSprite!: Phaser.GameObjects.Image;
 
     constructor() {
         super("GameScene");
@@ -12,23 +18,29 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
 
     preload() {
         this.load.image("ground", "assets/img/ground.png");
-        this.load.image("wall", "assets/img/wall.jpeg");
+        this.load.image("char", "assets/img/char.png");
     }
 
     create(): void {
-        console.log("create ejecutado");
+        const tileSize = 64;
+
+        //grid cells
         this.grid = new Grid(mapData);
+
+
+        this.player = new Player(4, 9, "char");
+        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync but the sprite moves in the inverse axis of logic move
+        console.log(this.grid.occupacymap)
+        
 
         const graphics = this.add.graphics();
 
         graphics.lineStyle(1, 0xffff00);
 
-        const tileSize = 64; //Tamaño de cell
-
         for (let y = 0; y < this.grid.height; y++) {
-               console.log("for y");
+          
             for (let x = 0; x < this.grid.width; x++) {
-                   console.log("antes de stroke");
+                 
 
                     const cell = this.grid.cells[y][x];
 
@@ -39,10 +51,51 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
                     );
             }
         }
-       console.log("fin create");
+
+        this.playerSprite = this.add.image( // the graphic actualization
+            this.player.Col * tileSize + tileSize / 2,
+            this.player.Row * tileSize + tileSize / 2,
+            this.player.asset
+        );
+        
+
+
+     
+        this.keys = this.input.keyboard!.addKeys({
+            W: Phaser.Input.Keyboard.KeyCodes.W,
+            A: Phaser.Input.Keyboard.KeyCodes.A,
+            S: Phaser.Input.Keyboard.KeyCodes.S,
+            D: Phaser.Input.Keyboard.KeyCodes.D
+        });
     }
+
+    update(): void {
+    
+    //moves player
+    if (Phaser.Input.Keyboard.JustDown(this.keys.W)) {
+        this.grid.MoveEntity(this.player, [0, -1]); // more is down
+        console.log(this.grid.occupacymap)
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.keys.S)) {
+        this.grid.MoveEntity(this.player, [0, 1]);
+        console.log(this.grid.occupacymap)
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.keys.A)) {
+        this.grid.MoveEntity(this.player, [-1, 0]);
+        console.log(this.grid.occupacymap)
+    }
+    if (Phaser.Input.Keyboard.JustDown(this.keys.D)) {
+        this.grid.MoveEntity(this.player, [1, 0]);
+        console.log(this.grid.occupacymap)
+    }
+
+    this.playerSprite.setPosition(
+        this.player.Row * 64 + 32,
+        this.player.Col * 64 + 32
+    );
 }
 
+}
 
 
 // CICLO DE VIDA DEL COMUNISMO (SCENA)
