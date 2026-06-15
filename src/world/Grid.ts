@@ -81,7 +81,7 @@ export class Grid {
 
         if (cell.walkable == true){
             if(occupant == null){
-                this.occupacymap[e.Col    ][e.Row    ] = null;
+                this.occupacymap[e.Col    ][e.Row    ] = null; //i dont get the error
                 
                 e.move(targetRow,targetCol);
                 
