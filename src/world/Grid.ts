@@ -1,17 +1,31 @@
 import { Cell } from './Cell';
 import { TTable } from './terrains/TTable';
-import  Player  from '../entities/Player.ts';
+import  Player  from '../entities/Player';
+import Entity from '../entities/Entity';
+
+
+
+interface EntityData {
+    Row: number;
+    Col: number;
+    Asset: string;
+}
+
+interface MapData {
+    terrain: number[][];
+    entity: EntityData[];
+}
 
 export class Grid {
     width: number;
     height: number;
     cells: Cell[][];
-    occupacymap: (Player | null)[][];// sustituir por entidades
+    occupacymap: (Entity | null)[][];// sustituir por entidades
 
 
-    constructor(mapData: number[][]) {
-        this.height = mapData.length;
-        this.width = mapData[0].length;
+    constructor(mapData: MapData) {
+        this.height = mapData.terrain.length;
+        this.width = mapData.terrain[0].length;
         this.cells = [];
         this.occupacymap = [];
 
@@ -20,11 +34,11 @@ export class Grid {
 
             const row: Cell[] = [];
 
-            const rowo:(Player | null)[]=[]; 
+            const rowo:(Entity | null)[]=[]; 
 
             for (let x = 0; x < this.width; x++) {
 
-                const tileId = mapData[y][x];
+                const tileId = mapData.terrain[y][x];
 
 
                 const terrainInfo = TTable[tileId];

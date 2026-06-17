@@ -2,6 +2,8 @@ import Phaser from "phaser";
 import {Grid} from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
+import map0 from "../world/terrains/maps/map0";
+
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
 
@@ -26,7 +28,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         const tileSize = 64;
 
         //grid cells
-        this.grid = new Grid(mapData);
+        this.grid = new Grid(map0);
 
 
         this.player = new Player(4, 9, "char");
@@ -56,7 +58,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         this.playerSprite = this.add.image( // the graphic actualization
             this.player.Col * tileSize + tileSize / 2,
             this.player.Row * tileSize + tileSize / 2,
-            this.player.asset
+            this.player.Asset
         );
         
 
