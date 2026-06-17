@@ -6,7 +6,7 @@ export class Grid {
     width: number;
     height: number;
     cells: Cell[][];
-    occupacymap: Player[][];// sustituir por entidades
+    occupacymap: (Player | null)[][];// sustituir por entidades
 
 
     constructor(mapData: number[][]) {

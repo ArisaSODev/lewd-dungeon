@@ -19,6 +19,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
     preload() {
         this.load.image("ground", "assets/img/ground.png");
         this.load.image("char", "assets/img/char.png");
+        this.load.image("wall", "assets/img/wall.png");
     }
 
     create(): void {
@@ -29,7 +30,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
 
 
         this.player = new Player(4, 9, "char");
-        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync but the sprite moves in the inverse axis of logic move
+        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync but the spri logic move
         console.log(this.grid.occupacymap)
         
 
