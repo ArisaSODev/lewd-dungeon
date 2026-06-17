@@ -20,7 +20,7 @@ export class Grid {
 
             const row: Cell[] = [];
 
-            const rowo:Player[]=[]; 
+            const rowo:(Player | null)[]=[]; 
 
             for (let x = 0; x < this.width; x++) {
 
