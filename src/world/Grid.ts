@@ -3,7 +3,7 @@ import { TTable } from './terrains/TTable';
 import  Player  from '../entities/Player';
 import Entity from '../entities/Entity';
 
-
+//persiste the logical error, axis inversed
 
 interface EntityData {
     Row: number;
@@ -20,15 +20,15 @@ export class Grid {
     width: number;
     height: number;
     cells: Cell[][];
-    occupacymap: (Entity | null)[][];// sustituir por entidades
-
+    occupacymap: (Entity | null)[][];
+    entitylist: (Entity | Player)[];
 
     constructor(mapData: MapData) {
         this.height = mapData.terrain.length;
         this.width = mapData.terrain[0].length;
         this.cells = [];
         this.occupacymap = [];
-
+        this.entitylist = [];
 
         for (let y = 0; y < this.height; y++) {
 
@@ -59,16 +59,28 @@ export class Grid {
         }
 
         //logical init of entities
+    
+        for (let i = 0; i < mapData.entity.length; i++){
+        
+            let objetiveCol = mapData.entity[i].Col
+            let objetiveRow = mapData.entity[i].Row
+            
+            let ent! : (Player | Entity)
 
-        let objetiveCol = mapData.entity[0].Col
-        let objetiveRow = mapData.entity[0].Row
-        
-        if (this.occupacymap[objetiveCol][objetiveRow] == null){ //no overlay
+            if (this.occupacymap[objetiveCol][objetiveRow] == null){ //no overlay
+                
+
+                if (mapData.entity[i].Asset == "User"){
+                    ent = new Player(objetiveRow, objetiveCol, mapData.entity[i].Asset);
+                }else{
+                    ent = new Entity(objetiveCol, objetiveRow, mapData.entity[i].Asset); // wtf, i need sovle it
+                }
+                this.entitylist.push(ent)
+
+                this.occupacymap[objetiveCol][objetiveRow] = ent
             
-            this.occupacymap[objetiveCol][objetiveRow] = new Player(objetiveCol, objetiveRow, mapData.entity[0].Asset)
-            
+            }
         }
-        
     }
 
     getCell(row: number, col: number){
@@ -102,11 +114,11 @@ export class Grid {
         const cell = this.getCell(targetRow, targetCol);
         let occupant = this.getOccupancy(targetRow, targetCol);
 
-        console.log(cell);
+    
 
         if (cell.walkable == true){
             if(occupant == null){
-                this.occupacymap[e.Col    ][e.Row    ] = null; //i dont get the error
+                this.occupacymap[e.Col    ][e.Row    ] = null; //the error was solved with declare occupacy map as player | null
                 
                 e.move(targetRow,targetCol);
                 

@@ -14,7 +14,12 @@
   "entity": [
     {
       "Row": 4,
-      "Col": 4,
+      "Col": 9,
+      "Asset": "User"
+    },
+    {
+      "Row": 1,
+      "Col": 0,
       "Asset": "char"
     }
   ]

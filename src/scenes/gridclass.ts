@@ -13,6 +13,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
   
     private player!: Player;
     private playerSprite!: Phaser.GameObjects.Image;
+    private entitiesSprite!: Phaser.GameObjects.Image;
 
     constructor() {
         super("GameScene");
@@ -22,6 +23,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         this.load.image("ground", "assets/img/ground.png");
         this.load.image("char", "assets/img/char.png");
         this.load.image("wall", "assets/img/wall.png");
+        this.load.image("User", "assets/img/User.png");
     }
 
     create(): void {
@@ -30,9 +32,8 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         //grid cells
         this.grid = new Grid(map0);
 
-
-        this.player = new Player(4, 9, "char");
-        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync but the spri logic move
+        console.log(this.grid.entitylist)
+        
         console.log(this.grid.occupacymap)
         
 
@@ -55,12 +56,29 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
             }
         }
 
-        this.playerSprite = this.add.image( // the graphic actualization
-            this.player.Col * tileSize + tileSize / 2,
-            this.player.Row * tileSize + tileSize / 2,
-            this.player.Asset
-        );
-        
+        //identify player
+
+        for(let i=0; i<this.grid.entitylist.length; i++){
+            let nowent = this.grid.entitylist[i]
+            if (nowent.Asset == "User"){
+                this.player = nowent            
+                    
+                console.log(nowent.Asset)
+
+                this.playerSprite = this.add.image( // the graphic actualization
+                this.player.Col * tileSize + tileSize / 2,
+                this.player.Row * tileSize + tileSize / 2,
+                this.player.Asset
+                );
+            }else{
+
+            this.entitiesSprite = this.add.image(
+            nowent.Col * tileSize + tileSize / 2,
+            nowent.Row * tileSize + tileSize / 2,
+            nowent.Asset
+            );
+            }
+        }
 
 
      
