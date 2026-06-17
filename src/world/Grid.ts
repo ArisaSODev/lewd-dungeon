@@ -54,10 +54,21 @@ export class Grid {
                 row.push(cell);
                 rowo.push(null);
             }
-
             this.cells.push(row);
             this.occupacymap.push(rowo);
         }
+
+        //logical init of entities
+
+        let objetiveCol = mapData.entity[0].Col
+        let objetiveRow = mapData.entity[0].Row
+        
+        if (this.occupacymap[objetiveCol][objetiveRow] == null){ //no overlay
+            
+            this.occupacymap[objetiveCol][objetiveRow] = new Player(objetiveCol, objetiveRow, mapData.entity[0].Asset)
+            
+        }
+        
     }
 
     getCell(row: number, col: number){

@@ -2,9 +2,9 @@
 import Phaser from 'phaser';
 
 //declaro cada escena
-import GameScenes from './scenes/GameScenes.ts';
-import grid1 from './scenes/grid1.ts';
-import grid2 from './scenes/gridclass.ts';
+import GameScenes from './scenes/GameScenes';
+import grid1 from './scenes/grid1';
+import grid2 from './scenes/gridclass';
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,

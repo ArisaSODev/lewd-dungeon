@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import {Grid} from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
-import map0 from "../world/terrains/maps/map0";
+import map0 from "../world/terrains/maps/map0";// i need solve this, is fking stressing!!!!
 
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
