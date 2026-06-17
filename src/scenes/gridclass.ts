@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import {Grid} from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
+import map0 from "../world/map/map0.json";
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
 
@@ -19,6 +20,8 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
     preload() {
         this.load.image("ground", "assets/img/ground.png");
         this.load.image("char", "assets/img/char.png");
+        this.load.image("wall", "assets/img/wall.jpg");
+    
     }
 
     create(): void {
@@ -27,9 +30,14 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         //grid cells
         this.grid = new Grid(mapData);
 
-
+        //maybe this should be a function
         this.player = new Player(4, 9, "char");
-        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync but the sprite moves in the inverse axis of logic move
+       
+        //console.log(map0.terrain);
+        //console.log(map0.entities);
+
+
+        this.grid.occupacymap[this.player.Col][this.player.Row] =this.player;//occupacymap is full sync
         console.log(this.grid.occupacymap)
         
 
@@ -57,10 +65,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
             this.player.Row * tileSize + tileSize / 2,
             this.player.asset
         );
-        
-
-
-     
+             
         this.keys = this.input.keyboard!.addKeys({
             W: Phaser.Input.Keyboard.KeyCodes.W,
             A: Phaser.Input.Keyboard.KeyCodes.A,

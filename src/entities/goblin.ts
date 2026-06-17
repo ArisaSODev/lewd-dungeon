@@ -1,12 +1,7 @@
 import Entity from "./Entity";
 
-export default class Goblin extends Entity{
-   
-
-    move(targetRow: number, targetCol: number){ 
-        this.Row = targetRow;
-        this.Col = targetCol;  
+export default class Goblin extends Entity {
+    constructor(row: number, col: number) {
+        super(row, col, "goblin");
     }
-
-
 }

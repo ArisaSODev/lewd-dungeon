@@ -1,12 +1,13 @@
 import { Cell } from './Cell';
 import { TTable } from './terrains/TTable';
 import  Player  from '../entities/Player.ts';
+import Entity from '../entities/Entity.ts';
 
 export class Grid {
     width: number;
     height: number;
     cells: Cell[][];
-    occupacymap: Player[][];// sustituir por entidades
+    occupacymap: (Entity | null) [][];// sustituir por entidades
 
 
     constructor(mapData: number[][]) {
@@ -20,7 +21,7 @@ export class Grid {
 
             const row: Cell[] = [];
 
-            const rowo:Player[]=[]; 
+            const rowo:(Entity | null)[]=[]; 
 
             for (let x = 0; x < this.width; x++) {
 
@@ -30,8 +31,6 @@ export class Grid {
                 const terrainInfo = TTable[tileId];
 
                 
-
-
                 const cell = new Cell(
                     terrainInfo.terrain,
                     terrainInfo.walkable
@@ -79,9 +78,9 @@ export class Grid {
 
         console.log(cell);
 
-        if (cell.walkable == true){
-            if(occupant == null){
-                this.occupacymap[e.Col    ][e.Row    ] = null; //i dont get the error
+        if (cell.walkable == true){// terrain evaluation
+            if(occupant == null){//ocupation evaluation
+                this.occupacymap[e.Col][e.Row] = null;
                 
                 e.move(targetRow,targetCol);
                 
