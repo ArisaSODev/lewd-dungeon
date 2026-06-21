@@ -1,0 +1,71 @@
+warning: in the working copy of 'src/scenes/GameScenes.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --cc src/entities/Player.ts[m
+[1mindex 3eb2b7a,d9d3225..0000000[m
+[1m--- a/src/entities/Player.ts[m
+[1m+++ b/src/entities/Player.ts[m
+[1mdiff --cc src/scenes/gridclass.ts[m
+[1mindex f1b431e,6a45ddb..0000000[m
+[1m--- a/src/scenes/gridclass.ts[m
+[1m+++ b/src/scenes/gridclass.ts[m
+[1mdiff --cc src/world/Grid.ts[m
+[1mindex 50f0ab8,9bfe347..0000000[m
+[1m--- a/src/world/Grid.ts[m
+[1m+++ b/src/world/Grid.ts[m
+[1mdiff --git a/src/numts/readme.md b/src/numts/readme.md[m
+[1mindex e69de29..63c07a5 100644[m
+[1m--- a/src/numts/readme.md[m
+[1m+++ b/src/numts/readme.md[m
+[36m@@ -0,0 +1,2 @@[m
+[32m+[m[32m# lib[m
+[32m+[m[32mi came from python, and i i want functions of numpy[m
+[1mdiff --git a/src/scenes/GameScenes.ts b/src/scenes/GameScenes.ts[m
+[1mindex 6c4c583..eb02327 100644[m
+[1m--- a/src/scenes/GameScenes.ts[m
+[1m+++ b/src/scenes/GameScenes.ts[m
+[36m@@ -1,4 +1,3 @@[m
+[31m-<<<<<<< HEAD[m
+ import Phaser from 'phaser';[m
+ [m
+ export default class GameScenes extends Phaser.Scene {[m
+[36m@@ -33,40 +32,4 @@[m [mcreate() {[m
+     update() {[m
+         // Se ejecuta cada frame[m
+     }[m
+[31m-=======[m
+[31m-import Phaser from 'phaser';[m
+[31m-[m
+[31m-export default class GameScenes extends Phaser.Scene {[m
+[31m-[m
+[31m-    constructor() {[m
+[31m-        super('GameScenes');[m
+[31m-    }[m
+[31m-[m
+[31m-    // aqui se cargan los assets[m
+[31m-    preload() {[m
+[31m-        this.load.image("ground","assets/img/ground.jpeg")[m
+[31m-        console.log('preload');[m
+[31m-    }[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-create() {[m
+[31m-[m
+[31m-    const map = this.make.tilemap({[m
+[31m-        tileWidth: 32,[m
+[31m-        tileHeight: 32,[m
+[31m-        width: 100,[m
+[31m-        height: 100[m
+[31m-    });[m
+[31m-[m
+ }[m
+[31m-[m
+[31m-[m
+[31m-[m
+[31m-    update() {[m
+[31m-        // Se ejecuta cada frame[m
+[31m-    }[m
+[31m->>>>>>> 817d57625342d6f18d904cd82f086dda8febd66a[m
+[31m-}[m
+\ No newline at end of file[m

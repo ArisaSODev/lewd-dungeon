@@ -1,4 +1,4 @@
-export class Cell {
+export default class Cell {
     terrain: string;
     walkable: boolean;
     

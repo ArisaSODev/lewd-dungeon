@@ -1,5 +1,5 @@
-import { Cell } from './Cell';
-import { TTable } from './terrains/TTable';
+import  Cell  from './Cell';
+import  {TTable}  from './terrains/TTable';
 import  Player  from '../entities/Player';
 import Entity from '../entities/Entity';
 
@@ -16,7 +16,7 @@ interface MapData {
     entity: EntityData[];
 }
 
-export class Grid {
+export default class Grid {
     width: number;
     height: number;
     cells: Cell[][];
