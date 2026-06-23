@@ -4,7 +4,7 @@ import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
 //import map0 from "../world/terrains/maps/map0";// <- solved
 import World from "../world/World";
-
+import Room from "../world/Room";
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
 
@@ -18,7 +18,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
 
     //world implementation
     private world!: World;
-
+    private currentRoom!: Room;
     constructor() {
         super("GameScene");
     }
@@ -35,11 +35,13 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
 
         this.world = new World(5, 10, 10); //total rooms, x size, y size
         //this world contains the matrix of rooms, and the rooms contains the grid
-        this.grid = this.world.initroom.grid;
+        this.currentRoom = this.world.initroom; //set the current room to the initial room
+        this.grid = this.currentRoom.grid; //set the grid to the current room's grid
+
         this.world.initroom.generateDoors(this.world.matrix);
 
-        console.log(this.world.matrix)
-        console.log(this.world.initroom)
+    
+        console.log(this.world.matrix);
 
         const graphics = this.add.graphics();
 
@@ -96,29 +98,42 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
 
     update(): void {
     
-    //moves player
-    if (Phaser.Input.Keyboard.JustDown(this.keys.W)) {
-        this.grid.MoveEntity(this.player, [0, -1]); // more is down
-        console.log(this.grid.occupacymap)
-    }
-    if (Phaser.Input.Keyboard.JustDown(this.keys.S)) {
-        this.grid.MoveEntity(this.player, [0, 1]);
-        console.log(this.grid.occupacymap)
-    }
-    if (Phaser.Input.Keyboard.JustDown(this.keys.A)) {
-        this.grid.MoveEntity(this.player, [-1, 0]);
-        console.log(this.grid.occupacymap)
-    }
-    if (Phaser.Input.Keyboard.JustDown(this.keys.D)) {
-        this.grid.MoveEntity(this.player, [1, 0]);
-        console.log(this.grid.occupacymap)
-    }
+        //moves player
+        if (Phaser.Input.Keyboard.JustDown(this.keys.W)) {
+            this.grid.MoveEntity(this.player, [0, -1]); // more is down
+            console.log(this.grid.occupacymap)
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keys.S)) {
+            this.grid.MoveEntity(this.player, [0, 1]);
+            console.log(this.grid.occupacymap)
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keys.A)) {
+            this.grid.MoveEntity(this.player, [-1, 0]);
+            console.log(this.grid.occupacymap)
+        }
+        if (Phaser.Input.Keyboard.JustDown(this.keys.D)) {
+            this.grid.MoveEntity(this.player, [1, 0]);
+            console.log(this.grid.occupacymap)
+        }
 
-    this.playerSprite.setPosition(
-        this.player.Row * 64 + 32,
-        this.player.Col * 64 + 32
-    );
-}
+        this.playerSprite.setPosition(
+            this.player.Row * 64 + 32,
+            this.player.Col * 64 + 32
+        );
+   
+        if (this.player.Row == 0){//this only can be north
+            this.currentRoom = this.world.PassDoor([0,1]);
+        }
+        if (this.player.Col == this.currentRoom.grid.width-1){//this only can be east
+            this.currentRoom = this.world.PassDoor([1,0]);
+        }
+        if (this.player.Row == this.currentRoom.grid.height-1){//this only can be south
+            this.currentRoom = this.world.PassDoor([0,-1]);
+        }
+        if (this.player.Col == 0){//this only can be west
+            this.currentRoom = this.world.PassDoor([-1,0]);
+        }
+    }
 
 }
 

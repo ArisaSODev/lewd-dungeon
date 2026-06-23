@@ -1,6 +1,7 @@
 import Room from './Room';
 import * as maps from './terrains/maps/index';
 import choice from '../systems/numts/random/choice';
+import Player from '../entities/Player';
 
 export default class World {
     matrix: Room[][];
@@ -54,6 +55,9 @@ export default class World {
                 }
             }
         } 
-    
+    }
+
+    PassDoor(pos: [number, number]): Room {
+        return this.matrix[pos[0]][pos[1]];
     }
 }
