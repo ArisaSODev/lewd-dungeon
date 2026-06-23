@@ -47,12 +47,13 @@ export default class World {
                     this.matrix[currentRoom.y + expand[1]][currentRoom.x + expand[0]] = new Room(choice(maps.default), currentRoom.x + expand[0], currentRoom.y + expand[1]);
                     //update the new currentRoom
                     currentRoom = this.matrix[currentRoom.y + expand[1]][currentRoom.x + expand[0]];
-                    break;
+                    break; 
                 } else{
                     expand[0] += increase[0];
                     expand[1] += increase[1];
                 }
             }
         } 
+    
     }
 }

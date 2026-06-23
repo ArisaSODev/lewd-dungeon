@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Grid from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
-import map0 from "../world/terrains/maps/map0";// i need solve this, is fking stressing!!!!
+//import map0 from "../world/terrains/maps/map0";// <- solved
 import World from "../world/World";
 
 
@@ -36,7 +36,7 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
         this.world = new World(5, 10, 10); //total rooms, x size, y size
         //this world contains the matrix of rooms, and the rooms contains the grid
         this.grid = this.world.initroom.grid;
-
+        this.world.initroom.generateDoors(this.world.matrix);
 
         console.log(this.world.matrix)
         console.log(this.world.initroom)

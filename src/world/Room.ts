@@ -31,4 +31,42 @@ export default class Room {
         this.west = null;
     }
 
+    generateDoors(matrix: Room[][]) {
+        let here = this;
+        let x = this.x;
+        let y = this.y;
+
+        let ylim = this.grid.width;
+        let xlim = this.grid.height;
+
+        //north
+        if( matrix[x][y+1] != null){
+            this.grid.cells[0][Math.floor(xlim/2)].terrain = "door";
+            this.grid.cells[0][Math.floor(xlim/2)].walkable = true;
+            console.log("ylim: " + ylim);
+            console.log("xlim: " + xlim);
+        }
+
+        //east
+         if( matrix[x+1][y] != null){
+            this.grid.cells[Math.floor(ylim/2)][xlim-1].terrain = "door";
+            this.grid.cells[Math.floor(ylim/2)][xlim-1].walkable = true;
+            console.log("ylim: " + ylim);
+            console.log("xlim: " + xlim);
+        }
+        //south
+        if( matrix[x][y-1] != null){
+            this.grid.cells[ylim-1][Math.floor(xlim/2)].terrain = "door";
+            this.grid.cells[ylim-1][Math.floor(xlim/2)].walkable = true;
+            console.log("ylim: " + ylim);
+            console.log("xlim: " + xlim);
+        }
+        //west
+         if( matrix[x-1][y] != null){
+            this.grid.cells[Math.floor(ylim/2)][0].terrain = "door";
+            this.grid.cells[Math.floor(ylim/2)][0].walkable = true;
+            console.log("ylim: " + ylim);
+            console.log("xlim: " + xlim);
+        }
+    }
 }
