@@ -3,6 +3,7 @@ import Grid from '../world/Grid';
 import { mapData } from "../world/terrains/TTypes";
 import Player from "../entities/Player";
 import map0 from "../world/terrains/maps/map0";// i need solve this, is fking stressing!!!!
+import World from "../world/World";
 
 
 export default class GameScene extends Phaser.Scene{// extends declara herencia
@@ -14,6 +15,9 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
     private player!: Player;
     private playerSprite!: Phaser.GameObjects.Image;
     private entitiesSprite!: Phaser.GameObjects.Image;
+
+    //world implementation
+    private world!: World;
 
     constructor() {
         super("GameScene");
@@ -29,13 +33,13 @@ export default class GameScene extends Phaser.Scene{// extends declara herencia
     create(): void {
         const tileSize = 64;
 
-        //grid cells
-        this.grid = new Grid(map0);
+        this.world = new World(5, 10, 10); //total rooms, x size, y size
+        //this world contains the matrix of rooms, and the rooms contains the grid
+        this.grid = this.world.initroom.grid;
 
-        console.log(this.grid.entitylist)
-        
-        console.log(this.grid.occupacymap)
-        
+
+        console.log(this.world.matrix)
+        console.log(this.world.initroom)
 
         const graphics = this.add.graphics();
 
